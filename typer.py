@@ -1,12 +1,16 @@
 # coding: utf-8
 
-# 不可使用 PIL 及 Python 标准库以外的第三方库
-from types import FunctionType
 from PIL import Image, ImageFont, ImageDraw
+
+import string
 
 
 def is_chinese(c):
     return u'\u4e00' <= c <= u'\u9fff'
+
+
+def is_punctuation(c):
+    return c in string.punctuation or c in '。，？‘’“”《》'
 
 
 # 分词
@@ -71,7 +75,7 @@ def draw_lines(x, y, image, font, token_lines, line_height, color=255):
 
 
 if __name__ == '__main__':
-    text = '谋杀我的完美完美完美完美完美完美偶像偶像'
+    text = '谋杀我的完美完美完美完美完美完美偶像偶像谋杀我的完美完美完美完美完美完美偶像偶像'
     image = Image.open("./1.png")
     width, height = int(image.size[0] * 0.8), int(image.size[1] * 0.2)
     x, y = int(image.size[0] * 0.1), int(image.size[1] * 0.6)
